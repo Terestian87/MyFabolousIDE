@@ -1,26 +1,124 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import React from "react";
+import FileItem from "./FileItem";
+import FolderItem from "./FolderItem";
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+import styled from "styled-components";
+import { JsxElement } from "typescript";
+
+type MockDataType = {
+  name: string;
+  files?: MockDataType[]
+};
+// #region mockData
+const mockData: MockDataType = {
+  name: "my-project",
+  files: [
+    {
+      name: "public",
+      files: [
+        {
+          name: "index.html",
+        },
+      ],
+    },
+    {
+      name: "src",
+      files: [
+        {
+          name: "components",
+          files: [
+            {
+              name: "Button",
+              files: [
+                {
+                  name: "index.jsx",
+                },
+                {
+                  name: "directory.module.scss",
+                },
+              ],
+            },
+            {
+              name: "Badge",
+              files: [
+                {
+                  name: "index.jsx",
+                },
+                {
+                  name: "file.module.scss",
+                },
+              ],
+            },
+            {
+              name: "Header",
+              files: [
+                {
+                  name: "index.jsx",
+                },
+              ],
+            },
+          ],
+        },
+        {
+          name: "utils",
+          files: [
+            {
+              name: "dateUtil.js",
+            },
+            {
+              name: "numberUtil.js",
+            },
+          ],
+        },
+      ],
+    },
+    {
+      name: "index.js",
+    },
+    {
+      name: "App.js",
+    },
+    {
+      name: "styles.css",
+    },
+    {
+      name: "package.json",
+    },
+  ],
+};
+// #endregion
+
+const StyledContainer = styled('div')``
+const StyledExplorer = styled('div')``
+const StyledContentBox = styled('div')``
+const StyledFileItem = styled('div')``
+const StyledFolderItem = styled('div')``
+
+const isFolder = !!mockData.files
+
+const generateItemRecurively = (data: MockDataType) => {
+  let key: keyof MockDataType
+  for (key in data) {
+    if (typeof data[key] == "string") {
+      console.log('return the string component')
+    } else {
+      console.log('return folder component with data[key] as argument and function as prop') 
+    }
+  }
 }
+const App = () => {
+  return( 
+    <StyledContainer>
+      <StyledExplorer>
+      {/* @ts-ignore */}
+      {generateItemRecurively(mockData)}
+      </StyledExplorer>
+      <StyledContentBox>
+
+      </StyledContentBox>
+  </StyledContainer>
+    )
+  };
+
 
 export default App;
