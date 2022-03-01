@@ -3,12 +3,12 @@ import FileItem from "./FileItem";
 import FolderItem from "./FolderItem";
 
 import styled from "styled-components";
-import { JsxElement } from "typescript";
 
 type MockDataType = {
   name: string;
-  files?: MockDataType[]
+  files?: MockDataType[];
 };
+
 // #region mockData
 const mockData: MockDataType = {
   name: "my-project",
@@ -88,37 +88,42 @@ const mockData: MockDataType = {
 };
 // #endregion
 
-const StyledContainer = styled('div')``
-const StyledExplorer = styled('div')``
-const StyledContentBox = styled('div')``
-const StyledFileItem = styled('div')``
-const StyledFolderItem = styled('div')``
+const StyledContainer = styled("div")``;
+const StyledExplorer = styled("div")``;
+const StyledContentBox = styled("div")``;
 
-const isFolder = !!mockData.files
+// const isFolder = !!mockData.files;
 
 const generateItemRecurively = (data: MockDataType) => {
-  let key: keyof MockDataType
-  for (key in data) {
-    if (typeof data[key] == "string") {
-      console.log('return the string component')
-    } else {
-      console.log('return folder component with data[key] as argument and function as prop') 
-    }
-  }
-}
+  Object.keys(data).map((element) => {
+    if (element === 'name'){
+      return <FileItem />
+    } else 
+    // @ts-ignore
+    <FolderItem/> && generateItemRecurively(data[element])
+    // @ts-ignore
+  })
+  // let key: keyof MockDataType;
+  // for (key in data) {
+  //   if (typeof data[key] == "string") {
+  //     console.log("a");
+  //     return <FileItem />;
+  //   } else {
+  //     console.log("b");
+  //     return <FolderItem />;
+  //   }
+  // }
+};
 const App = () => {
-  return( 
+  return (
     <StyledContainer>
       <StyledExplorer>
-      {/* @ts-ignore */}
-      {generateItemRecurively(mockData)}
+        {/* @ts-ignore */}
+        {generateItemRecurively(mockData)}
       </StyledExplorer>
-      <StyledContentBox>
-
-      </StyledContentBox>
-  </StyledContainer>
-    )
-  };
-
+      <StyledContentBox></StyledContentBox>
+    </StyledContainer>
+  );
+};
 
 export default App;
