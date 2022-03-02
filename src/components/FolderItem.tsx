@@ -4,7 +4,6 @@ import { StyledLabel } from "./App";
 
 const FolderItemContainer = styled("div")`
   margin-left: 20px;
-  border: 1px solid grey;
   margin: 1px;
   padding: 3px;
   cursor: pointer;
@@ -17,10 +16,18 @@ type Props = {
 };
 
 const FolderItem = (props: Props) => {
+  const [isOpen, setIsOpen] = useState<boolean>(true)
+  const handleclick = (e: any) => {
+    e.stopPropagation()
+    setIsOpen(!isOpen)
+  }
   return (
     <FolderItemContainer>
-      <StyledLabel>{props.name} (Folder)</StyledLabel>
+      <StyledLabel onClick={handleclick}>{props.name} (Folder)</StyledLabel>
+      {isOpen &&<>
       {props.children}
+      </>
+    }
     </FolderItemContainer>
   );
 };
