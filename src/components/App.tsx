@@ -4,7 +4,7 @@ import FolderItem from "./FolderItem";
 
 import styled from "styled-components";
 
-type MockDataType = {
+export type MockDataType = {
   name: string;
   files?: MockDataType[];
 };
@@ -94,32 +94,23 @@ const StyledContentBox = styled("div")``;
 
 // const isFolder = !!mockData.files;
 
-const generateItemRecurively = (data: MockDataType) => {
-  Object.keys(data).map((element) => {
-    if (element === 'name'){
-      return <FileItem />
-    } else 
-    // @ts-ignore
-    <FolderItem/> && generateItemRecurively(data[element])
-    // @ts-ignore
-  })
-  // let key: keyof MockDataType;
-  // for (key in data) {
-  //   if (typeof data[key] == "string") {
-  //     console.log("a");
-  //     return <FileItem />;
-  //   } else {
-  //     console.log("b");
-  //     return <FolderItem />;
-  //   }
-  // }
-};
+const generateItemRecursively = (data: MockDataType) => {
+    if (data.files) {
+      return (
+        <FolderItem name={data.name}>
+          {data.files.map((elm) => generateItemRecursively(elm))}
+        </FolderItem>
+      )
+    } 
+    return <FileItem name={data.name}/>;
+  };
+
 const App = () => {
   return (
     <StyledContainer>
       <StyledExplorer>
         {/* @ts-ignore */}
-        {generateItemRecurively(mockData)}
+        {generateItemRecursively(mockData)}
       </StyledExplorer>
       <StyledContentBox></StyledContentBox>
     </StyledContainer>
