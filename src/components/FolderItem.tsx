@@ -1,12 +1,14 @@
 import React, { useState } from "react";
 import styled from "styled-components";
+import { StyledWrapper } from './App'
 import { StyledLabel } from "./App";
+import { FaFolder, FaFolderOpen } from 'react-icons/fa'
+
 
 const FolderItemContainer = styled("div")`
-  margin-left: 20px;
-  margin: 1px;
-  padding: 3px;
+  margin: 5px 0 0 20px;
   cursor: pointer;
+  padding-left:5px;
 `;
 
 type Props = {
@@ -21,13 +23,15 @@ const FolderItem = (props: Props) => {
     e.stopPropagation()
     setIsOpen(!isOpen)
   }
+
   return (
-    <FolderItemContainer>
-      <StyledLabel onClick={handleclick}>{props.name} (Folder)</StyledLabel>
-      {isOpen &&<>
-      {props.children}
-      </>
-    }
+    <FolderItemContainer >
+      <StyledWrapper  onClick={handleclick}>
+      {isOpen ? <FaFolderOpen /> : <FaFolder />}
+      <StyledLabel>{props.name}</StyledLabel>
+      </StyledWrapper>
+      {isOpen && 
+        <>{props.children}</>}
     </FolderItemContainer>
   );
 };
