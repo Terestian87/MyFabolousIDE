@@ -1,13 +1,19 @@
-import React from 'react'
+import React from "react";
 import styled from "styled-components";
 
-const FileItemcontainer = styled('div')``
-type Props = {}
+const FileItemcontainer = styled("div")`
+  margin-left: 5px;
+`;
+type Props = {
+  name: string;
+};
 
 const FileItem = (props: Props) => {
   return (
-    <div>FileItem</div>
-  )
-}
+    <FileItemcontainer>
+      <div>{props.name}</div>
+    </FileItemcontainer>
+  );
+};
 
-export default FileItem
+export default FileItem;

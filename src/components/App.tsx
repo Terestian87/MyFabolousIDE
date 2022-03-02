@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import FileItem from "./FileItem";
 import FolderItem from "./FolderItem";
 
@@ -88,30 +88,41 @@ const mockData: MockDataType = {
 };
 // #endregion
 
-const StyledContainer = styled("div")``;
-const StyledExplorer = styled("div")``;
-const StyledContentBox = styled("div")``;
+export const StyledLabel = styled("div")``;
+const StyledContainer = styled("div")`
+  border: 1px solid black;
+  display: flex;
+`;
 
-// const isFolder = !!mockData.files;
+const StyledExplorer = styled("div")`
+  margin: 10px;
+  padding: 5px;
+  border: 2px solid purple;
+  width: 30%;
+`;
+
+const StyledContentBox = styled("div")`
+  margin: 10px;
+  padding: 5px;
+  border: 2px solid purple;
+  width: 75%;
+`;
 
 const generateItemRecursively = (data: MockDataType) => {
-    if (data.files) {
-      return (
-        <FolderItem name={data.name}>
-          {data.files.map((elm) => generateItemRecursively(elm))}
-        </FolderItem>
-      )
-    } 
-    return <FileItem name={data.name}/>;
-  };
+  if (data.files) {
+    return (
+      <FolderItem name={data.name} isOpen={true}>
+        {data.files.map((elm) => generateItemRecursively(elm))}
+      </FolderItem>
+    );
+  }
+  return <FileItem name={data.name} />;
+};
 
 const App = () => {
   return (
     <StyledContainer>
-      <StyledExplorer>
-        {/* @ts-ignore */}
-        {generateItemRecursively(mockData)}
-      </StyledExplorer>
+      <StyledExplorer>{generateItemRecursively(mockData)}</StyledExplorer>
       <StyledContentBox></StyledContentBox>
     </StyledContainer>
   );
