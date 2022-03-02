@@ -1,8 +1,12 @@
 import React from "react";
 import styled from "styled-components";
+import { StyledWrapper } from './App'
+import { StyledLabel } from "./App";
+import { FaFileAlt } from 'react-icons/fa'
+
 
 const FileItemcontainer = styled("div")`
-  margin-left: 5px;
+  margin: 5px 0 0 10px;
 `;
 type Props = {
   name: string;
@@ -11,7 +15,10 @@ type Props = {
 const FileItem = (props: Props) => {
   return (
     <FileItemcontainer>
-      <div>{props.name}</div>
+      <StyledWrapper>
+        <FaFileAlt />
+        <StyledLabel>{props.name}</StyledLabel>
+      </StyledWrapper>
     </FileItemcontainer>
   );
 };
