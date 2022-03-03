@@ -11,33 +11,37 @@ export type MockDataType = {
 };
 
 // #region Styled components
-export const StyledLabel = styled("div")`
-margin-left: 5px;
-`;
 
 const StyledContainer = styled("div")`
   border: 1px solid black;
   display: flex;
   margin-left:10px;
-`;
+  align-items: stretch;
+  background-color: rgb(40, 44, 52);
+  color:white;
+  height:95vh;
+  `;
 
 const StyledExplorer = styled("div")`
-  margin: 10px;
-  padding: 5px;
-  border: 2px solid purple;
+  padding: 15px;
   width: 30%;
-`;
+  height:100%;
+  border-right: 1px solid black;
+  overflow-x: auto;
+  `;
+
+export const StyledLabel = styled("div")`
+  margin-left: 5px;
+  `;
 
 const StyledContentBox = styled("div")`
-  margin: 10px;
-  padding: 5px;
-  border: 2px solid purple;
+  padding: 15px;
   width: 75%;
+  height:100%;
 `;
 
 export const StyledWrapper = styled('div')`
 display:flex;
-
 `
 // #endregion
 

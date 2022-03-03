@@ -6,7 +6,7 @@ import { FaFolder, FaFolderOpen } from 'react-icons/fa'
 
 
 const FolderItemContainer = styled("div")`
-  margin: 5px 0 0 20px;
+  margin: 5px 0 0 10px;
   cursor: pointer;
   padding-left:5px;
 `;
